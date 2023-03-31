@@ -1,13 +1,26 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
 $( document ).ready(function () {
   
   var headerDateAndTime = dayjs().format('dddd, MMMM D, YYYY h:mm A');
   $('#currentDay').text(headerDateAndTime);
 
   var currentHour = dayjs().format("HH")
+  $('.time-block').each(function(i){
+    var blockTime = i+9
+
+    if(blockTime < currentHour) {
+      $(this).addClass("past")
+    }else if(blockTime == currentHour) {
+      $(this).addClass("present")
+    }else {
+      $(this).addClass("future")
+    }
+  })
+
+  $("textarea").each(function(index) {
+    var hour = $(this).parent().attr('id')
+    var info = localStorage.getItem(hour)
+    $(this).val(info)
+  })
 
   $('.saveBtn').click(function() {
     var hour = $(this).parent().attr('id')
@@ -15,6 +28,7 @@ $( document ).ready(function () {
     localStorage.setItem(hour, toDo)
   
   })
+})
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -34,11 +48,3 @@ $( document ).ready(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
-
-
-.each
-
-adding classes
-
-splitting string options

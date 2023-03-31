@@ -2,11 +2,20 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-var headerDateAndTime = dayjs().format('dddd, MMMM D, YYYY h:mm A');
-$('currentDay').text(headerDateAndTime);
+$( document ).ready(function () {
+  
+  var headerDateAndTime = dayjs().format('dddd, MMMM D, YYYY h:mm A');
+  $('#currentDay').text(headerDateAndTime);
 
+  var currentHour = dayjs().format("HH")
 
-$(function () {
+  $('.saveBtn').click(function() {
+    var hour = $(this).parent().attr('id')
+    var toDo = $(this).siblings('textarea').val()
+    localStorage.setItem(hour, toDo)
+  
+  })
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -26,3 +35,10 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+
+
+.each
+
+adding classes
+
+splitting string options
